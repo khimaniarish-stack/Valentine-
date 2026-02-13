@@ -4,31 +4,31 @@
 <title>Will You Be My Valentine?</title>
 <style>
 body {
-  background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+  background: linear-gradient(to bottom, #ffe6f2, #ffccd9);
   text-align: center;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Lucida Handwriting', cursive, sans-serif;
   height: 100vh;
   overflow: hidden;
   margin: 0;
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 55px;
   margin-top: 50px;
-  color: #fff;
-  text-shadow: 2px 2px #ff0000;
+  color: #d9006c;
+  text-shadow: 3px 3px #ffb3d9;
 }
 
 h2 {
-  font-size: 30px;
-  color: #fff;
-  text-shadow: 1px 1px #ff0000;
+  font-size: 32px;
+  color: #ff3366;
+  text-shadow: 2px 2px #ffd6e8;
 }
 
 button {
   padding: 15px 30px;
-  font-size: 20px;
-  border-radius: 12px;
+  font-size: 22px;
+  border-radius: 15px;
   border: none;
   margin: 15px;
   cursor: pointer;
@@ -36,7 +36,7 @@ button {
 }
 
 #yes {
-  background: #ff4d6d;
+  background: #ff1a75;
   color: #fff;
 }
 
@@ -48,9 +48,9 @@ button {
 
 .heart {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background: red;
+  width: 25px;
+  height: 25px;
+  background: #ff3366;
   transform: rotate(-45deg);
   animation: floatUp linear infinite;
 }
@@ -59,14 +59,14 @@ button {
 .heart:after {
   content: "";
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background: red;
+  width: 25px;
+  height: 25px;
+  background: #ff3366;
   border-radius: 50%;
 }
 
-.heart:before { top: -15px; left: 0; }
-.heart:after { left: 15px; top: 0; }
+.heart:before { top: -12px; left: 0; }
+.heart:after { left: 12px; top: 0; }
 
 @keyframes floatUp {
   0% { transform: translateY(0) rotate(-45deg); opacity: 1;}
@@ -84,7 +84,7 @@ button {
 <button id="no" onmouseover="move()">No 💔</button>
 
 <audio autoplay loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
 </audio>
 
 <script>
@@ -113,7 +113,7 @@ function createHeart() {
   setTimeout(() => { heart.remove(); }, 6000);
 }
 
-setInterval(createHeart, 300);
+setInterval(createHeart, 250);
 </script>
 
 </body>
