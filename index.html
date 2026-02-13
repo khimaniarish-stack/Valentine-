@@ -1,56 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+<meta charset="UTF-8">
 <title>Will You Be My Valentine?</title>
+
 <style>
 body {
-  background: linear-gradient(to bottom, #ffe6f2, #ffccd9);
-  text-align: center;
+  background: linear-gradient(to bottom, #ffe6f0, #ffccd9);
   font-family: 'Lucida Handwriting', cursive, sans-serif;
-  height: 100vh;
+  text-align: center;
   overflow: hidden;
-  margin: 0;
+  margin-top: 50px;
 }
 
 h1 {
-  font-size: 55px;
-  margin-top: 50px;
-  color: #d9006c;
-  text-shadow: 3px 3px #ffb3d9;
+  font-size: 45px;
+  color: #ff0066;
+  text-shadow: 2px 2px #ffb3d9;
 }
 
 h2 {
-  font-size: 32px;
   color: #ff3366;
-  text-shadow: 2px 2px #ffd6e8;
+  font-size: 28px;
 }
 
 button {
+  font-size: 20px;
   padding: 15px 30px;
-  font-size: 22px;
-  border-radius: 15px;
+  margin: 10px;
+  border-radius: 12px;
   border: none;
-  margin: 15px;
   cursor: pointer;
-  font-weight: bold;
 }
 
 #yes {
-  background: #ff1a75;
-  color: #fff;
+  background-color: #ff4d88;
+  color: white;
 }
 
 #no {
-  background: #aaa;
-  color: #fff;
+  background-color: #cccccc;
   position: absolute;
 }
 
+/* Confetti */
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  opacity: 0.8;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(600px) rotate(360deg); opacity: 0; }
+}
+
+/* Floating hearts */
 .heart {
   position: absolute;
   width: 25px;
   height: 25px;
-  background: #ff3366;
+  background-color: #ff3366;
   transform: rotate(-45deg);
   animation: floatUp linear infinite;
 }
@@ -61,7 +75,7 @@ button {
   position: absolute;
   width: 25px;
   height: 25px;
-  background: #ff3366;
+  background-color: #ff3366;
   border-radius: 50%;
 }
 
@@ -78,10 +92,10 @@ button {
 <body>
 
 <h1>Almira 💖</h1>
-<h2>Will you be my Valentine?</h2>
+<h1>Will You Be My Valentine?</h1>
 
-<button id="yes" onclick="yes()">Yes ❤️</button>
-<button id="no" onmouseover="move()">No 💔</button>
+<button id="yes" onclick="yesClicked()">Yes ❤️</button>
+<button id="no" onmouseover="moveButton()">No 💔</button>
 
 <audio autoplay loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
@@ -91,29 +105,54 @@ button {
 const noBtn = document.getElementById("no");
 
 // Make "No" button run away
-function move() {
-  let x = Math.random() * (window.innerWidth - 100);
-  let y = Math.random() * (window.innerHeight - 50);
+function moveButton() {
+  let x = Math.random() * (window.innerWidth - 150);
+  let y = Math.random() * (window.innerHeight - 100);
   noBtn.style.left = x + "px";
   noBtn.style.top = y + "px";
 }
 
-// On Yes click
-function yes() {
-  document.body.innerHTML = "<h1>YAYYYYY ❤️</h1><h2>See you on Feb 14 😘</h2>";
+// Confetti effect
+function createConfetti() {
+  const confetti = document.createElement("div");
+  confetti.className = "confetti";
+  confetti.style.left = Math.random() * window.innerWidth + "px";
+  confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 60%)`;
+  document.body.appendChild(confetti);
+  setTimeout(() => confetti.remove(), 3000);
 }
 
-// Make hearts float
+// Typewriter effect
+function typeWriter(text, element, i = 0) {
+  if (i < text.length) {
+    element.innerHTML += text.charAt(i);
+    setTimeout(() => typeWriter(text, element, i + 1), 50);
+  }
+}
+
+// Floating hearts
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
   heart.style.left = Math.random() * window.innerWidth + "px";
   heart.style.animationDuration = 3 + Math.random() * 3 + "s";
   document.body.appendChild(heart);
-  setTimeout(() => { heart.remove(); }, 6000);
+  setTimeout(() => heart.remove(), 6000);
 }
+setInterval(createHeart, 300);
 
-setInterval(createHeart, 250);
+function yesClicked() {
+  document.body.innerHTML = `<h1 id="message"></h1><h2 id="message2"></h2>`;
+  
+  const msg1 = "YAYYYYY ❤️";
+  const msg2 = "You just made me the happiest person 💘 See you on Feb 14 😘";
+  
+  typeWriter(msg1, document.getElementById("message"));
+  setTimeout(() => typeWriter(msg2, document.getElementById("message2")), 1000);
+  
+  // Confetti effect
+  setInterval(createConfetti, 100);
+}
 </script>
 
 </body>
